@@ -1,6 +1,7 @@
 package com.kc.pokenative_cp.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -50,13 +52,14 @@ fun CustomSearchBar(
 
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
 
         TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
             value = textState,
             onValueChange = {
                 textState = it
@@ -73,7 +76,8 @@ fun CustomSearchBar(
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedLabelColor = Color.Transparent
+                unfocusedLabelColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
             )
         )
 
@@ -117,7 +121,7 @@ fun CustomSearchBar(
 
 @Preview
 @Composable
-fun CustomSearchBarPreview() {
+private fun CustomSearchBarPreview() {
     MaterialTheme {
         CustomSearchBar(
             query = "",

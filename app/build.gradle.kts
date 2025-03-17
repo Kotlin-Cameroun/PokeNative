@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -50,6 +52,17 @@ android {
 }
 
 dependencies {
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //Splash Api
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //Compose Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.9")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
