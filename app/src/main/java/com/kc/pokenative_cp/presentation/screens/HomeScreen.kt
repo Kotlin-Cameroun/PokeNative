@@ -13,8 +13,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -23,9 +25,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kc.pokenative_cp.presentation.components.AppNavbar
+import com.kc.pokenative_cp.presentation.components.PokeballLoader
 import com.kc.pokenative_cp.presentation.components.PokemonItem
 import com.kc.pokenative_cp.presentation.components.SortOption
 import com.kc.pokenative_cp.utils.AppColors
+import kotlinx.coroutines.delay
 
 data class Pokemon(
     val name: String,
@@ -35,6 +39,13 @@ data class Pokemon(
 
 @Composable
 fun HomeScreen() {
+
+    var isLoading by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        delay(5500)
+        isLoading = false
+    }
 
     var query by rememberSaveable { mutableStateOf("") }
     var selectedSort by rememberSaveable { mutableStateOf(SortOption.NUMBER) }
@@ -73,27 +84,31 @@ fun HomeScreen() {
                 .padding(12.dp)
                 .fillMaxSize()
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(Color.White)
-                    .padding(12.dp)
-            ) {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(minSize = 80.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.fillMaxSize()
+            if (isLoading) {
+                PokeballLoader()
+            }else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color.White)
+                        .padding(12.dp)
                 ) {
-                    items(pokemonList.size) { index ->
-                        val pokemon = pokemonList[index]
-                        PokemonItem(
-                            pokemonName = pokemon.name,
-                            pokemonNumber = pokemon.number,
-                            pokemonImageUrl = pokemon.imageUrl,
-                            onPokemonClick = {}
-                        )
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(minSize = 80.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(pokemonList.size) { index ->
+                            val pokemon = pokemonList[index]
+                            PokemonItem(
+                                pokemonName = pokemon.name,
+                                pokemonNumber = pokemon.number,
+                                pokemonImageUrl = pokemon.imageUrl,
+                                onPokemonClick = {}
+                            )
+                        }
                     }
                 }
             }

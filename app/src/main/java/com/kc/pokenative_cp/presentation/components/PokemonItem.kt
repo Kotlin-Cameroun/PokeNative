@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +39,11 @@ fun PokemonItem(
     Box(
         modifier = modifier
             .size(124.dp)
+            .shadow(
+                elevation = 2.dp,
+                shape = RoundedCornerShape(16.dp),
+                clip = false
+            )
             .clip(RoundedCornerShape(16.dp))
             .clickable { onPokemonClick() }
             .background(Color.White)
@@ -81,7 +87,7 @@ fun PokemonItem(
                 .align(Alignment.Center)
                 .size(72.dp)
                 .offset(y = (4).dp)
-                .zIndex(1f) // passer au-dessus
+                .zIndex(1f) // up the image layer
         )
 
     }

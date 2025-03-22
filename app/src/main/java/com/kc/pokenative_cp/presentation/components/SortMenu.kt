@@ -137,7 +137,6 @@ fun SortMenuPreview() {
                 .padding(24.dp),
             contentAlignment = Alignment.TopEnd
         ) {
-            // On affiche uniquement le contenu de SortMenu sans Popup
             Card(
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
