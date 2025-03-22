@@ -59,7 +59,7 @@ fun CustomSearchBar(
 
         TextField(
             modifier = Modifier
-                .fillMaxWidth(),
+                .weight(1f),
             value = textState,
             onValueChange = {
                 textState = it
@@ -78,7 +78,8 @@ fun CustomSearchBar(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedLabelColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-            )
+            ),
+            singleLine = true,
         )
 
         Spacer(modifier = Modifier.width(8.dp))
