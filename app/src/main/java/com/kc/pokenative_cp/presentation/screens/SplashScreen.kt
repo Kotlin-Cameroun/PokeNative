@@ -1,5 +1,6 @@
 package com.kc.pokenative_cp.presentation.screens
 
+import android.app.Activity
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -16,9 +17,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowInsetsControllerCompat
 import com.kc.pokenative_cp.R
 import com.kc.pokenative_cp.utils.AppColors
 import kotlinx.coroutines.delay
@@ -27,6 +31,16 @@ import kotlinx.coroutines.delay
 fun SplashScreen(
     onNavigateToHome: () -> Unit
 ) {
+
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        if (context is Activity) {
+            context.window.statusBarColor = AppColors.primary.toArgb()
+            context.window.navigationBarColor = AppColors.primary.toArgb()
+            WindowInsetsControllerCompat(context.window, context.window.decorView).isAppearanceLightStatusBars = false
+        }
+    }
+
     val scale = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
@@ -44,7 +58,6 @@ fun SplashScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .windowInsetsPadding()
             .background(AppColors.primary),
         contentAlignment = Alignment.Center
     ) {

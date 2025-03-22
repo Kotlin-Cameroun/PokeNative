@@ -9,13 +9,12 @@ import com.kc.pokenative_cp.presentation.screens.HomeScreen
 import com.kc.pokenative_cp.presentation.screens.SplashScreen
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavGraph(
-    startDestination:String
+    startDestination: String
 ) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "splash") {
+    NavHost(navController = navController, startDestination = startDestination) {
         composable("splash") {
             SplashScreen(
                 onNavigateToHome = {
